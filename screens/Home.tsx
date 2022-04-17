@@ -6,13 +6,14 @@ import { RootTabScreenProps } from '../types';
 import StarterButton from "../components/StarterButton";
 import AddStarterButton from "../components/AddStarterButton";
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   return (
     <View style={styles.container}>
       <Text style={styles.categoryTitle}>Starters</Text>
       {/*<View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />*/}
-      <StarterButton /><AddStarterButton />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      <AddStarterButton />
+      {/*<StarterButton />*/}
+      <EditScreenInfo path="/screens/Home.tsx" />
     </View>
   );
 }
