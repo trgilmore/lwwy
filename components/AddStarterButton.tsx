@@ -1,14 +1,15 @@
-import {Text, View} from "./Themed";
-import {MonoText} from "./StyledText";
+import { View} from "./Themed";
 import {Pressable, StyleSheet, TouchableOpacity} from "react-native";
 import Colors from "../constants/Colors";
 import {FontAwesome} from "@expo/vector-icons";
+import {useState} from "react";
 
 
 export default function AddStarterButton() {
+    const [modalVisible, setModalVisible] = useState(false);
     return (
           <Pressable
-            onPress={() => {}}
+            onPress={() => setModalVisible(true)}
             style={({ pressed }) => ({
               opacity: pressed ? 0.5 : 1,
             })}>

@@ -68,7 +68,7 @@ function BottomTabNavigator() {
         options={({ navigation }: RootTabScreenProps<'Home'>) => ({
           title: '',
           headerStyle: {
-              backgroundColor: '#242331'
+              backgroundColor: '#242331',
           },
             tabBarStyle: {
                 backgroundColor: '#242331'
@@ -89,7 +89,7 @@ function BottomTabNavigator() {
           //   </Pressable>
           // ),
             headerLeft: () => (
-              <Image source={require('../assets/images/logo_small.png')} />
+              <Image style={{ marginLeft: 25, marginTop: 10 }} source={require('../assets/images/logo_small.png') }/>
             ),
         })}
       />
@@ -99,7 +99,7 @@ function BottomTabNavigator() {
         options={{
             title: '',
             headerStyle: {
-                backgroundColor: '#242331'
+                backgroundColor: '#242331',
             },
             tabBarStyle: {
                 backgroundColor: '#242331'

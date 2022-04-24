@@ -5,13 +5,17 @@ import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import StarterButton from "../components/StarterButton";
 import AddStarterButton from "../components/AddStarterButton";
+import AddStarterModal from "../components/AddStarterModal";
+import {useState} from "react";
 
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.container}>
       <Text style={styles.categoryTitle}>Starters</Text>
       {/*<View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />*/}
       <AddStarterButton />
+      <AddStarterModal visible={modalVisible} />
       {/*<StarterButton />*/}
       <EditScreenInfo path="/screens/Home.tsx" />
     </View>
