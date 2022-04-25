@@ -12,29 +12,34 @@ interface AppStartModalProps {
 
 const AddStarterModal = (props: AppStartModalProps) => {
     const [selectedFlour, setSelectedFlour] = useState('');
+    const [flourAmount, setFlourAmount] = useState('');
     const [isChecked, setChecked] = useState(false);
     const [isEnabled, setIsEnabled] = useState(false);
     const [starterName, setStarterName] = useState('');
     const [starterSeed, setStarterSeed] = useState('');
     const [seedAmount, setSeedAmount] = useState('');
     const [waterAmount, setWaterAmount] = useState('');
+    const [feedingInterval, setFeedingInterval] = useState('');
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const NEW_STARTER = {
+        name: starterName,
+        waterAmount: waterAmount,
+        flourType: selectedFlour,
+        flourAmount: flourAmount,
+        startFromScratch: isChecked,
+        seedStarter: isChecked? null : starterSeed,
+        seedAmount: isChecked? null : seedAmount,
+        feedingInterval: feedingInterval,
+        notification: isEnabled
+    }
     const storeData = async () => {
         try {
-            await AsyncStorage.setItem('ingredientType', 'starter')
-            await AsyncStorage.setItem('starterName', starterName)
-            await AsyncStorage.setItem('waterAmount', JSON.stringify(waterAmount))
-            await AsyncStorage.setItem('flourType', selectedFlour)
-            await AsyncStorage.setItem('startFromScratch', JSON.stringify(isChecked))
-            if(!isChecked){
-                await AsyncStorage.setItem('starterSeed', starterSeed)
-                await AsyncStorage.setItem('seedAmount', JSON.stringify(seedAmount))
-            }
-
+            await AsyncStorage.setItem('starters', JSON.stringify(NEW_STARTER))
         } catch (e) {
             // saving error
         }
     }
+    console.log(NEW_STARTER)
     return (
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -58,7 +63,7 @@ const AddStarterModal = (props: AppStartModalProps) => {
                             <Picker.Item label="BRM All Purpose" value="BRMAP" />
                         </Picker>
                         </View>
-                        <TextInput style={styles.inputNum} placeholder="0g" keyboardType="numeric"/>
+                        <TextInput style={styles.inputNum} placeholder="0g" keyboardType="numeric" onChangeText={(data) => setFlourAmount(data)}/>
                     </View>
                     <Text style={styles.promptText}>Add additional flour type</Text>
                     <Pressable onPress={() => Alert.alert('Feature not yet available')}>
@@ -94,7 +99,7 @@ const AddStarterModal = (props: AppStartModalProps) => {
                     </View>
                     <View style={styles.inputCategory}>
                         <Text style={styles.categoryLabel}>Feeding Interval</Text>
-                        <TextInput style={styles.inputNum} placeholder="24h" keyboardType="numeric"/>
+                        <TextInput style={styles.inputNum} placeholder="24h" keyboardType="numeric" onChangeText={(data) => setFeedingInterval(data)}/>
                     </View>
                     <View style={styles.inputCategory}>
                         <FontAwesome style={styles.bell} name={isEnabled? 'bell' : 'bell-slash'} size={25} color={'black'}/>
@@ -119,6 +124,7 @@ const AddStarterModal = (props: AppStartModalProps) => {
                     </View>
                 </View>
             </View>
+
 )}
 
 const styles = StyleSheet.create({
