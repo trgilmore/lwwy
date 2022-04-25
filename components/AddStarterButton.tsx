@@ -4,12 +4,14 @@ import Colors from "../constants/Colors";
 import {FontAwesome} from "@expo/vector-icons";
 import {useState} from "react";
 
+interface AppStarterButtonProps {
+    onPress: () => void
+}
 
-export default function AddStarterButton() {
-    const [modalVisible, setModalVisible] = useState(false);
+const AddStarterButton = (props: AppStarterButtonProps) => {
+    //const [modalVisible, setModalVisible] = useState(false);
     return (
-          <Pressable
-            onPress={() => setModalVisible(true)}
+          <Pressable onPress={props.onPress}
             style={({ pressed }) => ({
               opacity: pressed ? 0.5 : 1,
             })}>
@@ -30,3 +32,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+export default AddStarterButton;
