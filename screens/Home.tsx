@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     fontSize: 20,
     fontWeight: 'bold',
-
+    marginBottom: 10,
   },
   separator: {
     marginVertical: 30,

@@ -4,23 +4,44 @@ import Checkbox from 'expo-checkbox';
 import {View} from "./Themed";
 import {useState} from "react";
 import {FontAwesome} from "@expo/vector-icons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface AppStartModalProps {
     onRequestClose: () => void
 }
 
 const AddStarterModal = (props: AppStartModalProps) => {
-    const [selectedFlour, setSelectedFlour] = useState();
+    const [selectedFlour, setSelectedFlour] = useState('');
     const [isChecked, setChecked] = useState(false);
     const [isEnabled, setIsEnabled] = useState(false);
+    const [starterName, setStarterName] = useState('');
+    const [starterSeed, setStarterSeed] = useState('');
+    const [seedAmount, setSeedAmount] = useState('');
+    const [waterAmount, setWaterAmount] = useState('');
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const storeData = async () => {
+        try {
+            await AsyncStorage.setItem('ingredientType', 'starter')
+            await AsyncStorage.setItem('starterName', starterName)
+            await AsyncStorage.setItem('waterAmount', JSON.stringify(waterAmount))
+            await AsyncStorage.setItem('flourType', selectedFlour)
+            await AsyncStorage.setItem('startFromScratch', JSON.stringify(isChecked))
+            if(!isChecked){
+                await AsyncStorage.setItem('starterSeed', starterSeed)
+                await AsyncStorage.setItem('seedAmount', JSON.stringify(seedAmount))
+            }
+
+        } catch (e) {
+            // saving error
+        }
+    }
     return (
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    <TextInput style={styles.inputName} placeholder="Name"/>
+                    <TextInput style={styles.inputName} placeholder="Name" onChangeText={(data) => setStarterName(data)}/>
                     <View style={styles.inputCategory}>
                         <Text style={styles.categoryLabel}>Water</Text>
-                        <TextInput style={styles.inputNum} placeholder="0g" keyboardType="numeric"/>
+                        <TextInput style={styles.inputNum} placeholder="0g" keyboardType="numeric" onChangeText={(data) => setWaterAmount(data)}/>
                     </View>
                     <View style={styles.inputCategory}>
                         <View style={styles.pickerView}>
@@ -60,16 +81,16 @@ const AddStarterModal = (props: AppStartModalProps) => {
                                 enabled={!isChecked}
                                 mode='dropdown'
                                 style={styles.picker}
-                                selectedValue={selectedFlour}
+                                selectedValue={starterSeed}
                                 onValueChange={(itemValue, itemIndex) =>
-                                    setSelectedFlour(itemValue)
+                                    setStarterSeed(itemValue)
                                 }>
                                 <Picker.Item label="Starter" value='null' />
                                 <Picker.Item label="Louie" value="louie" />
                                 <Picker.Item label="Corey" value="corey" />
                             </Picker>
                         </View>
-                        <TextInput value={isChecked? '0' : undefined} style={styles.inputNum} placeholder="0g" keyboardType="numeric"/>
+                        <TextInput value={isChecked? '0' : undefined} style={styles.inputNum} placeholder="0g" keyboardType="numeric" onChangeText={(data) => setSeedAmount(data)}/>
                     </View>
                     <View style={styles.inputCategory}>
                         <Text style={styles.categoryLabel}>Feeding Interval</Text>
