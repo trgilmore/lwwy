@@ -1,4 +1,4 @@
-import {Alert, Modal, Pressable, StyleSheet} from 'react-native';
+import { Modal, StyleSheet} from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -10,11 +10,11 @@ import {useState} from "react";
 
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   const [modalVisible, setModalVisible] = useState(false);
-
+const existingStarters =[]
   return (
     <View style={styles.container}>
       <Text style={styles.categoryTitle}>Starters</Text>
-      {/*<View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />*/}
+      <View style={styles.starters} lightColor="#eee" darkColor="#242331" >
       <AddStarterButton onPress={() => setModalVisible(true)} />
 
       <Modal
@@ -27,7 +27,8 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
           setModalVisible(!modalVisible);
         }}/>
       </Modal>
-      {/*<StarterButton />*/}
+      <StarterButton onPress={ () => navigation.navigate('Starter')} />
+    </View>
       <EditScreenInfo path="/screens/Home.tsx" />
     </View>
   );
@@ -91,5 +92,9 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+  },
+  starters: {
+    flexDirection:"row",
+    height: 75,
   },
 });

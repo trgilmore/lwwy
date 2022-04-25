@@ -4,11 +4,11 @@ import Colors from "../constants/Colors";
 import {FontAwesome} from "@expo/vector-icons";
 import {useState} from "react";
 
-interface AppStarterButtonProps {
+interface AddStarterButtonProps {
     onPress: () => void
 }
 
-const AddStarterButton = (props: AppStarterButtonProps) => {
+const AddStarterButton = (props: AddStarterButtonProps) => {
     //const [modalVisible, setModalVisible] = useState(false);
     return (
           <Pressable onPress={props.onPress}
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#C1B2AB',
         borderRadius: 6,
         justifyContent: 'center',
+        marginRight: 7,
     },
 });
 
