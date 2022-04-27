@@ -30,7 +30,8 @@ const AddStarterModal = (props: AppStartModalProps) => {
         seedStarter: isChecked? null : starterSeed,
         seedAmount: isChecked? null : seedAmount,
         feedingInterval: feedingInterval,
-        notification: isEnabled
+        notification: isEnabled,
+        dateCreated: new Date(),
     }
     const storeData = async () => {
         try {
@@ -38,6 +39,10 @@ const AddStarterModal = (props: AppStartModalProps) => {
         } catch (e) {
             // saving error
         }
+    }
+    const onFeed = () => {
+        storeData();
+        props.onRequestClose;
     }
     console.log(NEW_STARTER)
     return (
@@ -113,7 +118,9 @@ const AddStarterModal = (props: AppStartModalProps) => {
                     </View>
                     <View style={styles.inputCategory}>
                     <Pressable
-                        style={[styles.button]}>
+                        style={[styles.button]}
+                        onPress={props.onRequestClose.bind(storeData)}
+                    >
                         <Text style={styles.textStyle}>Feed Starter</Text>
                     </Pressable>
                     <Pressable
