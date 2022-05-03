@@ -14,7 +14,8 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
+import Home from '../screens/Home';
+import StarterScreen from '../screens/StarterScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -39,6 +40,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="Starter" component={StarterScreen} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
@@ -58,17 +60,17 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
+        name="Home"
+        component={Home}
+        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
           title: '',
           headerStyle: {
-              backgroundColor: '#242331'
+              backgroundColor: '#242331',
           },
             tabBarStyle: {
                 backgroundColor: '#242331'
@@ -89,7 +91,7 @@ function BottomTabNavigator() {
           //   </Pressable>
           // ),
             headerLeft: () => (
-              <Image source={require('../assets/images/logo_small.png')} />
+              <Image style={{ marginLeft: 25, marginTop: 10 }} source={require('../assets/images/logo_small.png') }/>
             ),
         })}
       />
@@ -99,7 +101,7 @@ function BottomTabNavigator() {
         options={{
             title: '',
             headerStyle: {
-                backgroundColor: '#242331'
+                backgroundColor: '#242331',
             },
             tabBarStyle: {
                 backgroundColor: '#242331'

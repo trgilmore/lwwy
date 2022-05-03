@@ -1,15 +1,24 @@
-import {Text, View} from "./Themed";
-import {MonoText} from "./StyledText";
-import {StyleSheet, TouchableOpacity} from "react-native";
+import { View} from "./Themed";
+import {Pressable, StyleSheet, TouchableOpacity} from "react-native";
 import Colors from "../constants/Colors";
 import {FontAwesome} from "@expo/vector-icons";
+import {useState} from "react";
 
+interface AddStarterButtonProps {
+    onPress: () => void
+}
 
-export default function AddStarterButton() {
+const AddStarterButton = (props: AddStarterButtonProps) => {
+    //const [modalVisible, setModalVisible] = useState(false);
     return (
+          <Pressable onPress={props.onPress}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1,
+            })}>
         <View style={styles.button}>
         <FontAwesome name={'plus'} size={36} />
         </View>
+          </Pressable>
     );
 }
 
@@ -21,5 +30,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#C1B2AB',
         borderRadius: 6,
         justifyContent: 'center',
+        marginRight: 7,
     },
 });
+
+export default AddStarterButton;
