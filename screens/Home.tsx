@@ -29,7 +29,6 @@ const existingStarters =[]
       </Modal>
       <StarterButton onPress={ () => navigation.navigate('Starter')} />
     </View>
-      <EditScreenInfo path="/screens/Home.tsx" />
     </View>
   );
 }
