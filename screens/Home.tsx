@@ -7,6 +7,7 @@ import StarterButton from "../components/StarterButton";
 import AddStarterButton from "../components/AddStarterButton";
 import AddStarterModal from "../components/AddStarterModal";
 import {useState} from "react";
+import StarterCollection from "../components/StarterCollection";
 
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,18 +17,17 @@ const existingStarters =[]
       <Text style={styles.categoryTitle}>Starters</Text>
       <View style={styles.starters} lightColor="#eee" darkColor="#242331" >
       <AddStarterButton onPress={() => setModalVisible(true)} />
-
       <Modal
           animationType="slide"
           transparent={true}
           visible={modalVisible}
-
       >
         <AddStarterModal onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}/>
       </Modal>
-      <StarterButton onPress={ () => navigation.navigate('Starter')} />
+{/*<StarterCollection/>*/}
+      <StarterButton onPress={ () => navigation.navigate('Starter')} name={'test'}/>
     </View>
     </View>
   );

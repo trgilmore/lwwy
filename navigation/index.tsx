@@ -16,7 +16,7 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import Home from '../screens/Home';
 import StarterScreen from '../screens/StarterScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import FlourScreen from '../screens/FlourScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -97,7 +97,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="TabTwo"
-        component={TabTwoScreen}
+        component={FlourScreen}
         options={{
             title: '',
             headerStyle: {

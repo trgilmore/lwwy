@@ -12,20 +12,19 @@ interface StarterScreenProps {
 navigation : RootTabScreenProps<'Starter'>
 }
 
-let STARTER_OBJECT = {}
 const getData = async () => {
     try {
-        STARTER_OBJECT = await AsyncStorage.getItem('starters').then()
+         const STARTER_OBJECT = await AsyncStorage.getItem('starters')
         //return STARTER_OBJECT != null? JSON.parse(STARTER_OBJECT) : null;
     } catch (e) {
         // saving error
     }
 }
-console.log(getData())
+getData().then(r => console.log(r))
 const StarterScreen = (props: StarterScreenProps) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{STARTER_OBJECT.name}</Text>
+            <Text style={styles.title}>Hi</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
         </View>

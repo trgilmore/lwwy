@@ -4,7 +4,8 @@ import Checkbox from 'expo-checkbox';
 import {View} from "./Themed";
 import {useState} from "react";
 import {FontAwesome} from "@expo/vector-icons";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 interface AppStartModalProps {
     onRequestClose: () => void
@@ -32,19 +33,20 @@ const AddStarterModal = (props: AppStartModalProps) => {
         feedingInterval: feedingInterval,
         notification: isEnabled,
         dateCreated: new Date(),
+        feedings: [],
     }
-    const storeData = async () => {
-        try {
-            await AsyncStorage.setItem('starters', JSON.stringify(NEW_STARTER))
-        } catch (e) {
-            // saving error
+
+    const onFeed = async () => {
+        let data = await AsyncStorage.getItem("starters");
+
+        if (typeof data === "string") {
+            let arr = JSON.parse(data);
+            arr ? arr.push(NEW_STARTER) : (arr = [NEW_STARTER]);
+            await AsyncStorage.setItem("starters", JSON.stringify(arr));
         }
-    }
-    const onFeed = () => {
-        storeData();
-        props.onRequestClose;
-    }
-    console.log(NEW_STARTER)
+    };
+
+
     return (
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -119,7 +121,8 @@ const AddStarterModal = (props: AppStartModalProps) => {
                     <View style={styles.inputCategory}>
                     <Pressable
                         style={[styles.button]}
-                        onPress={props.onRequestClose.bind(storeData)}
+                        onPress={onFeed}
+                        onPressOut={props.onRequestClose}
                     >
                         <Text style={styles.textStyle}>Feed Starter</Text>
                     </Pressable>
