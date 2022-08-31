@@ -5,7 +5,7 @@ import {FontAwesome} from "@expo/vector-icons";
 import {useState} from "react";
 
 interface AddStarterButtonProps {
-    onPress: () => void
+    onPress: () => void 
 }
 
 const AddStarterButton = (props: AddStarterButtonProps) => {
